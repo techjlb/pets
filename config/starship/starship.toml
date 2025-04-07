@@ -33,7 +33,7 @@ Unknown = '󰠥'
 [username]
 style_user = 'yellow bold'
 style_root = 'black bold'
-format = '[//](black bold) [$user](#2883ff)' # 2883ff
+format = ' [$user](#2883ff)' # 2883ff
 disabled = false
 show_always = true
 

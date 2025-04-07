@@ -67,6 +67,8 @@ alias dl="docker ps -l -q"
 alias dx="docker exec -it"
 
 # Dirs
+alias zz="z -"
+alias cd="z"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
@@ -83,13 +85,23 @@ alias ltree="eza --tree --level=2  --icons --git"
 # vim
 alias vi=vim
 
+eval "$(zoxide init bash)"
+
 ### FZF ###
 export FZF_DEFAULT_COMMAND='fdfind --type f --hidden --follow'
+alias fe='fzf -m --preview="batcat --color=always {}" --bind "enter:become(vim {+})"'
+
+# Function for directory navigation with fzf
+fc() {
+  local dir
+  dir=$(fdfind --type d --hidden --follow | fzf --preview="eza -l --icons --git -a --color=always  {}")
+  if [ -n "$dir" ]; then
+    cd "$dir" || return
+  fi
+}
 
 # navigation
 cx() { cd "$@" && l; }
-
-eval "$(zoxide init bash)"
 
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then

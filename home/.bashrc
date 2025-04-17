@@ -77,6 +77,20 @@ alias ......="cd ../../../../.."
 
 alias cl='clear'
 
+tf() {
+  if [ -z "$1" ]; then
+    echo "Usage: tf <logfile>"
+    return 1
+  fi
+
+  if [ ! -f "$1" ]; then
+    echo "Error: '$1' is not a file."
+    return 1
+  fi
+
+  tail -f "$1" | ccze -A
+}
+
 # Eza
 alias l="eza -l --icons --git -a"
 alias lt="eza --tree --level=2 --long --icons --git"
@@ -114,3 +128,7 @@ fi
 source /usr/share/doc/fzf/examples/key-bindings.bash
 
 fastfetch
+
+if [ -f "$HOME/.bashrc_local" ]; then
+  source "$HOME/.bashrc_local"
+fi
